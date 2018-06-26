@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
@@ -7,6 +8,8 @@ const morgan = require('morgan')
 app.disable('x-powered-by')
 app.use(bodyParser.json())
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
+
+app.use(cors())
 
 const catsRoutes = require('./src/routes/cats')
 app.use('/cats', catsRoutes)
